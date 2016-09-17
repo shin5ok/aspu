@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use Data::Dumper;
 use Class::Accessor::Lite ( rw => [qw( path md5 )] );
+use Sys::Syslog qw(:DEFAULT setlogsock);
 use Storage_Select;
 
 our $command_format = qq{blobxfer %s %s %s --upload --saskey '%s'};
@@ -23,11 +24,22 @@ sub copy {
                         $storage_obj->container,
                         $self->{path},
                         $storage_obj->saskey;
-  print $command, "\n";
+  my $r = system $command . " > /dev/null 2>&1";
+
+  if ($r == 0) {
+    _logging( "ok: $command" );
+  } else {
+    _logging( "NG: $command" );
+
+  }
+  # print $command, "\n";
 }
 
 sub _logging {
-
+  openlog __FILE__, q{pid,delay}, q{local0};
+  setlogsock q{unix};
+  syslog q{info}, shift // q{};
+  closelog;
 }
 
 1;
