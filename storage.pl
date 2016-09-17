@@ -43,30 +43,36 @@ use JSON;
 use YAML;
 # use Storage;
 
+our $dispatch_yaml = qq{$ENV{HOME}/dispatch.yaml};
 our $json_path = qq{$ENV{HOME}/define-storage.yaml};
+my $dispatch_params //= YAML::LoadFile( $dispatch_yaml );
+my $define_storage;
+my $dispatch;
 
 sub get {
   my ($name) = @_;
   my $basename = basename $name;
   my $define_config = _get_config();
-  my $params;
+  my $storage_name;
   _DEFINE_CONFIG_:
   for my $c ( @$define_config ) {
     if ($basename =~ /^$c->{pattern}/i) {
-      $params = $c;
+      $storage_name = $c->{name};
       last _DEFINE_CONFIG_;
     }
   }
-  return Storage->new( $params );
+  return Storage->new( $dispatch_params->{$storage_name} );
 }
 
 sub _get_config {
+  return $define_storage if $define_storage;
   my $data = do {
     open my $fh, "<", $json_path;
     local $/;
     <$fh>;
   };
-  return decode_json( $data );
+  $define_storage = decode_json( $data );
+  return $define_storage;
 }
 
 package Storage;
