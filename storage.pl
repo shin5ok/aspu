@@ -35,16 +35,32 @@ sub copy {
 
 package Storage_Select 0.01;
 use File::Basename;
+use JSON;
+use YAML;
+# use Storage;
+
+our $json_path = qq{$ENV{HOME}/define-storage.yaml};
 
 sub get {
   my ($name) = @_;
   my $basename = basename $name;
   if ($basename =~ /^(a-z0-9)/i) {
   }
+  return Storage->new( );
+}
+
+sub _get_config {
+  my $data = do {
+    open my $fh, "<", $json_path;
+    local $/;
+    <$fh>;
+  };
+  return decode_json( $data );
 }
 
 package Storage;
 use Class::Accessor::Lite ( rw => [qw( account container saskey )] );
+use JSON;
 
 sub new {
   my ($class, %params) = @_;
