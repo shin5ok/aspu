@@ -33,6 +33,10 @@ sub copy {
   print $command, "\n";
 }
 
+sub _logging {
+
+}
+
 package Storage_Select 0.01;
 use File::Basename;
 use JSON;
@@ -44,9 +48,16 @@ our $json_path = qq{$ENV{HOME}/define-storage.yaml};
 sub get {
   my ($name) = @_;
   my $basename = basename $name;
-  if ($basename =~ /^(a-z0-9)/i) {
+  my $define_config = _get_config();
+  my $params;
+  _DEFINE_CONFIG_:
+  for my $c ( @$define_config ) {
+    if ($basename =~ /^$c->{pattern}/i) {
+      $params = $c;
+      last _DEFINE_CONFIG_;
+    }
   }
-  return Storage->new( );
+  return Storage->new( $params );
 }
 
 sub _get_config {
@@ -63,8 +74,8 @@ use Class::Accessor::Lite ( rw => [qw( account container saskey )] );
 use JSON;
 
 sub new {
-  my ($class, %params) = @_;
-  bless \%params;
+  my ($class, $params) = @_;
+  bless $params, $class;
 }
 
 1;
