@@ -1,0 +1,12 @@
+[
+  {
+    "name" : "a-p",
+    "pattern" : "[a-p]",
+    "storage" : "storage1"
+  },
+  {
+    "name" : "q-z0-9",
+    "pattern" : "[q-z0-9]",
+    "storage" : "storage2"
+  }
+]
