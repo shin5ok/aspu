@@ -48,6 +48,7 @@ use Class::Accessor::Lite ( rw => [qw( account container saskey )] );
 
 sub new {
   my ($class, %params) = @_;
+  bless \%params;
 }
 
 1;
