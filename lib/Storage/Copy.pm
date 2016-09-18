@@ -1,10 +1,10 @@
-package Storage_Copy 0.01;
+package Storage::Copy 0.01;
 use strict;
 use warnings;
 use Data::Dumper;
 use Class::Accessor::Lite ( rw => [qw( path md5 )] );
 use Sys::Syslog qw(:DEFAULT setlogsock);
-use Storage_Select;
+use Storage::Select;
 
 our $command_format = qq{blobxfer %s %s %s --upload --saskey '%s'};
 
@@ -18,7 +18,7 @@ sub new {
 
 sub copy {
   my ($self) = @_;
-  my $storage_obj = Storage_Select::get( $self->{path} ); 
+  my $storage_obj = Storage::Select::get( $self->{path} ); 
   my $command = sprintf $command_format, 
                         $storage_obj->account,
                         $storage_obj->container,

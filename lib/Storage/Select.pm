@@ -1,4 +1,4 @@
-package Storage_Select 0.01;
+package Storage::Select 0.01;
 use File::Basename;
 use JSON;
 use YAML;
