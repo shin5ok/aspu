@@ -5,6 +5,7 @@ use Data::Dumper;
 use Class::Accessor::Lite ( rw => [qw( path md5 )] );
 use Sys::Syslog qw(:DEFAULT setlogsock);
 use Storage::Select;
+use Storage::DB;
 
 our $command_format = qq{blobxfer %s %s %s --upload --saskey '%s'};
 
@@ -28,11 +29,11 @@ sub copy {
 
   if ($r == 0) {
     _logging( "ok: $command" );
+    return $storage_obj;
   } else {
     _logging( "NG: $command" );
-
+    return undef;
   }
-  # print $command, "\n";
 }
 
 sub _logging {
