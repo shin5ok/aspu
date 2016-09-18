@@ -7,6 +7,7 @@ use Parallel::ForkManager;
 use lib qq($FindBin::Bin/./lib);
 require Storage::Copy;
 require Storage::DB;
+require My_Utils;
 
 opts my $parallel => { isa => 'Int', default => 1 },
      my $debug    => { isa => 'Bool' };
@@ -28,6 +29,8 @@ while (my $data = <STDIN>) {
         container => $storage_obj->container,
       },
     );
+  } else {
+    My_Utils::post_to_myslack("kawano", "fail: $path");
   }
   $pf->finish;
 }
