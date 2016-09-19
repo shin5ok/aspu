@@ -3,6 +3,7 @@ use warnings;
 package My_Utils 0.01 {
 
   use Sys::Syslog qw(:DEFAULT setlogsock);
+  use File::Basename;
   use LWP::UserAgent;
   use Exporter q(import);
 
@@ -23,7 +24,7 @@ package My_Utils 0.01 {
   }
 
   sub logging {
-    openlog __FILE__, q{pid,delay}, q{local0};
+    openlog basename __FILE__, q{pid,delay}, q{local1};
     setlogsock q{unix};
     syslog q{info}, shift // q{};
     closelog;
