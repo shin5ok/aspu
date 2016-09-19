@@ -7,7 +7,7 @@ use Parallel::ForkManager;
 use lib qq($FindBin::Bin/./lib);
 require Storage::Copy;
 require Storage::DB;
-require My_Utils;
+use My_Utils qw(logging post_to_myslack);
 
 opts my $parallel => { isa => 'Int', default => 1 },
      my $debug    => { isa => 'Bool' };
@@ -30,7 +30,7 @@ while (my $data = <STDIN>) {
       },
     );
   } else {
-    My_Utils::post_to_myslack("kawano", "fail: $path");
+    post_to_myslack("kawano", "fail: $path");
   }
   $pf->finish;
 }
