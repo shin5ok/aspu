@@ -24,7 +24,8 @@ package My_Utils 0.01 {
   }
 
   sub logging {
-    openlog basename __FILE__, q{pid,delay}, q{local1};
+    my $caller = caller;
+    openlog $caller, q{pid,delay}, q{local1};
     setlogsock q{unix};
     syslog q{info}, shift // q{};
     closelog;
