@@ -3,11 +3,10 @@ use strict;
 use warnings;
 use Data::Dumper;
 use Class::Accessor::Lite ( rw => [qw( path md5 )] );
-use Sys::Syslog qw(:DEFAULT setlogsock);
 use Storage::Select;
 use My_Utils qw(logging);
 
-our $command_format = qq{blobxfer %s %s %s --upload --saskey '%s'};
+our $command_format = qq{blobxfer %s %s %s --upload --computeblockmd5 --saskey '%s'};
 
 sub new {
   my ($class, $path, $md5) = @_;
