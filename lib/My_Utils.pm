@@ -15,12 +15,14 @@ package My_Utils 0.01 {
   sub post_to_myslack {
     my ($channel, $message) = @_;
 
-    my $lwp //= LWP::UserAgent->new;
-       $lwp->timeout(10);
+    my $lwp //= do {
+                     LWP::UserAgent->new;
+                     $lwp->timeout(10);
+                     $lwp;
+                   };
 
     my $slack_url = $SLACK_BASE_URL . $channel;
     $lwp->post( $slack_url, { message => $message } );
-
   }
 
   sub logging {
