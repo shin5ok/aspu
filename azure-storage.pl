@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use FindBin;
 use opts;
+use File::Basename;
 use Parallel::ForkManager;
 use lib qq($FindBin::Bin/./lib);
 require Storage::Copy;
@@ -27,6 +28,7 @@ while (my $data = <STDIN>) {
         path      => $path,
         storage   => $storage_obj->account,
         container => $storage_obj->container,
+        filename  => basename $path,
       },
     );
   } else {
