@@ -72,7 +72,7 @@ Parallelism is 10.
   $ perl ./azure-storage.pl -p 10 < list.txt
 ```
 
-## Recording to DB
+## Writing to DB
 ### MongoDB(DocumentDB with MongoDB compatible)
 Default
 ```
