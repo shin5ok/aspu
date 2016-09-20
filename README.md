@@ -28,13 +28,13 @@
 
 
 ## Configure
-- dispatch.json
+### dispatch.json
 
-- define-storage.yaml
+### define-storage.yaml
 
 ## Usage
 
-- Pre requirement
+## Pre requirement
 You need to prepare a list to upload.
 ```
 /mnt/backup/managed000/gsg_txn/C/readblock.jpg
@@ -47,7 +47,7 @@ You need to prepare a list to upload.
   :
 ```
 
-- Run
+## Run
 ### Example1
 Parallelism is Single.(Default)
 ```
@@ -60,7 +60,7 @@ Parallelism is 10.
   $ perl ./azure-storage.pl -p 10 < list.txt
 ```
 
-- Recording
+## Recording to DB
 ### MongoDB(DocumentDB with MongoDB compatible)
 Default
 ```
@@ -70,8 +70,9 @@ Default
   { "_id" : ObjectId("57e0059c135f4e5189c344fe"), "container" : "bar", "filename" : "image025.jpg", "path" : "/mnt/backup/new-managed000/usr/local/src/php-5.3.14/ext/exif/tests/image025.jpg", "storage" : "pcpftest2101" }
     :
 ```
+You can use Azure DocumentDB with MongoDB compatible instead of MongoDB.
 
-- Logging 
+## Logging 
 ### Syslog
 Facility is local0, Level is info
 Example(Default on Ubuntu)
