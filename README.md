@@ -1,6 +1,7 @@
 # Azure Storage parallel uploader
 
-## Install Azure Storage parallel uploader
+## Get Started
+### Install
 1. Install requirement tools
 ```
   $ sudo pip install blobxfer -y
@@ -48,6 +49,17 @@ You need to prepare a list to upload.
 ```
 
 ## Run
+### 
+To run the script,
+You have to set environment value AZURE_STORAGE_SELECT_CONFIG_PATH that is used to config path.
+if not, config path is your HOME directory.
+```
+  $ export AZURE_STORAGE_SELECT_CONFIG_PATH=$HOME/storage-sync
+```
+For simply start, 
+You can copy dispatch.json and define-storage.yaml to $HOME or AZURE_STORAGE_SELECT_CONFIG_PATH,
+and edit for your Azure system environment.
+
 ### Example1
 Parallelism is Single.(Default)
 ```
@@ -85,3 +97,4 @@ At first, you need to get incoming api webhook uri, and set it to your environme
   $ export SLACK_API=https://hooks.slack.com/services/T1DF00000/B2DP00000/y7kqe88JsXrOwP0000000000
   $ perl ./azure_storage --slack channelname -p 5
 ```
+
