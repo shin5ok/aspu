@@ -22,6 +22,7 @@ _PF_:
 while (my $data = <STDIN>) {
   $pf->start and next _PF_;
   my ($path, $md5) = $data =~ /^(\S+)\s+(\S*)/;
+  # valus of md5 would not be used
   my $obj = Storage::Copy->new( $path, $md5 );
   if (my $storage_obj = $obj->copy) {
     $mongodb->upsert(
