@@ -15,7 +15,7 @@ done
 echo
 sudo true
 
-curl -L http://cpanmin.us/ | sudo perl - LWP::UserAgent MongoDB Parallel::ForkManager Class::Accessor::Lite JSON YAML opts
+curl -L http://cpanmin.us/ | sudo perl - LWP::UserAgent LWP::Protocol::https MongoDB Parallel::ForkManager Class::Accessor::Lite JSON YAML opts
 
 if perl -c ./azure-storage.pl > /dev/null 2>&1;
 then
