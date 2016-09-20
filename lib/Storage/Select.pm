@@ -5,8 +5,11 @@ use YAML;
 use Data::Dumper;
 require Storage;
 
-our $dispatch_json = qq{$ENV{HOME}/dispatch.json};
-our $define_yaml = qq{$ENV{HOME}/define-storage.yaml};
+my $config_path = exists $ENV{AZURE_STORAGE_SELECT_CONFIG_PATH}
+                ? $ENV{AZURE_STORAGE_SELECT_CONFIG_PATH}
+                : $ENV{HOME};
+our $dispatch_json = qq{$config_path/dispatch.json};
+our $define_yaml = qq{$config_path/define-storage.yaml};
 my $dispatch_params //= YAML::LoadFile( $define_yaml );
 my $define_storage;
 my $dispatch;
