@@ -4,15 +4,9 @@ use JSON;
 use YAML;
 use Data::Dumper;
 require Storage;
-# use Storage;
 
-# my $dispatch_yaml = qq{$ENV{HOME}/dispatch.json};
-# my $json_path = qq{$ENV{HOME}/define-storage.yaml};
-# my $dispatch_params //= YAML::LoadFile( $dispatch_yaml );
-# my $define_storage;
-# my $dispatch;
-my $dispatch_json = qq{$ENV{HOME}/dispatch.json};
-my $define_yaml = qq{$ENV{HOME}/define-storage.yaml};
+our $dispatch_json = qq{$ENV{HOME}/dispatch.json};
+our $define_yaml = qq{$ENV{HOME}/define-storage.yaml};
 my $dispatch_params //= YAML::LoadFile( $define_yaml );
 my $define_storage;
 my $dispatch;
