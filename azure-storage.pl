@@ -16,6 +16,8 @@ opts my $parallel => { isa => 'Int', default => 1 },
 my $pf = Parallel::ForkManager->new( $parallel );
 my $mongodb = Storage::DB->new;
 
+chdir "/";
+
 _PF_:
 while (my $data = <STDIN>) {
   $pf->start and next _PF_;
