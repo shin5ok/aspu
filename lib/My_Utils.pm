@@ -16,7 +16,7 @@ package My_Utils 0.01 {
     my ($channel, $message) = @_;
 
     my $lwp //= do {
-                     LWP::UserAgent->new;
+                     my $lwp = LWP::UserAgent->new;
                      $lwp->timeout(10);
                      $lwp;
                    };

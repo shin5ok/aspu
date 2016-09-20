@@ -11,6 +11,7 @@ require Storage::DB;
 use My_Utils qw(logging post_to_myslack);
 
 opts my $parallel => { isa => 'Int', default => 1 },
+     my $slack    => { isa => 'Str', },
      my $debug    => { isa => 'Bool' };
 
 my $pf = Parallel::ForkManager->new( $parallel );
@@ -35,7 +36,9 @@ while (my $data = <STDIN>) {
       },
     );
   } else {
-    post_to_myslack("kawano", "fail: $path");
+    if ($slack) {
+      post_to_myslack($slack, "fail: $path");
+    }
   }
   $pf->finish;
 }
