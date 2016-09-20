@@ -10,6 +10,7 @@ package My_Utils 0.01 {
 
   our @EXPORT_OK = qw( post_to_myslack logging );
 
+  # URL of slack api for incoming webhook
   our $SLACK_API = $ENV{MY_SLACK_API};
   
   my $lwp;

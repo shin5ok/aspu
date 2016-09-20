@@ -66,11 +66,11 @@ Default
 ```
   $ mongo azure_storage
   > db.store.find()
-  { "_id" : ObjectId("57e0059c135f4e5189c344fd"), "container" : "foo", "filename" : "test1pix.jpg", "path" : "/mnt/backup/new-managed000/usr/local/src/php-5.3.14/ext/standard/tests/image/test1pix.jpg", "storage" : "pcpftest9391" }
-  { "_id" : ObjectId("57e0059c135f4e5189c344fe"), "container" : "bar", "filename" : "image025.jpg", "path" : "/mnt/backup/new-managed000/usr/local/src/php-5.3.14/ext/exif/tests/image025.jpg", "storage" : "pcpftest2101" }
+  { "_id" : ObjectId("57e0059c135f4e5189c344fd"), "container" : "foo", "filename" : "test1pix.jpg", "path" : "/mnt/backup/new-managed000/usr/local/src/php-5.3.14/ext/standard/tests/image/test1pix.jpg", "storage" : "storage9391" }
+  { "_id" : ObjectId("57e0059c135f4e5189c344fe"), "container" : "bar", "filename" : "image025.jpg", "path" : "/mnt/backup/new-managed000/usr/local/src/php-5.3.14/ext/exif/tests/image025.jpg", "storage" : "storage2101" }
     :
 ```
-You can use Azure DocumentDB with MongoDB compatible instead of MongoDB.
+You can use Azure DocumentDB with MongoDB compatible instead of original MongoDB.
 
 ## Logging 
 ### Syslog
@@ -79,4 +79,9 @@ Example(Default on Ubuntu)
 ```
   $ tail -f /var/log/syslog
 ```
-
+### to Slack
+At first, you need to get incoming api webhook uri, and set it to your environment value SLACK_API
+```
+  $ export SLACK_API=https://hooks.slack.com/services/T1DF00000/B2DP00000/y7kqe88JsXrOwP0000000000
+  $ perl ./azure_storage --slack channelname -p 5
+```
