@@ -2,29 +2,29 @@
 
 ## Get Started
 ### Install
-##### 1. Install requirement tools
+#### 1. Install requirement tools
 ```
   $ sudo pip install blobxfer -y
 ```
 
 If you want to use mongodb on local  
-####### Ubuntu  
+###### Ubuntu  
 ```
   $ sudo apt-cache update
   $ sudo apt-get install mongodb-server mongodb -y
 ```
-####### CentOS 6 or later  
+###### CentOS 6 or later  
 ```
   $ sudo yum install epel-release -y
   $ sudo yum install mongodb-server mongodb -y
 ```
 
-##### 2. Get source from GitHub
+#### 2. Get source from GitHub
 ```
   $ git clone https://bitbucket.org/shkawan/storage-sync.git
 ```
 
-##### 3. Setup  
+#### 3. Setup  
   You need a superuser power. 
   You might be asked sudo password.
 ```
@@ -33,7 +33,7 @@ If you want to use mongodb on local
 ```
   If you got some messages, you should follow them.  
 
-##### 4. Test
+#### 4. Test
 ```
   $ perl -c ./azure-storage.pl
 ```
