@@ -7,6 +7,18 @@
   $ sudo pip install blobxfer -y
 ```
 
+If you want to use mongodb on local
+- Ubuntu
+```
+  $ sudo apt-cache update
+  $ sudo apt-get install mongodb-server mongodb -y
+```
+- CentOS 6 or later
+```
+  $ sudo yum install epel-release -y
+  $ sudo yum install mongodb-server mongodb -y
+```
+
 2. Get source from GitHub
 ```
   $ git clone https://bitbucket.org/shkawan/storage-sync.git
@@ -38,13 +50,13 @@
 ## Pre requirement
 You need to prepare a list to upload.
 ```
-/mnt/backup/managed000/gsg_txn/C/readblock.jpg
-/mnt/backup/managed000/gsg_txn/C/writeblock.jpg
-/mnt/backup/managed000/gsg_txn/C/deadlock.jpg
-/mnt/backup/managed000/gsg_txn/C/rwlocks1.jpg
-/mnt/backup/managed000/gsg_txn/C/simplelock.jpg
-/mnt/backup/managed000/gsg_txn/JAVA/readblock.jpg
-/mnt/backup/managed000/gsg_txn/JAVA/writeblock.jpg
+/mnt/backup/GST/C/readblock.jpg
+/mnt/backup/GST/C/writeblock.jpg
+/mnt/backup/GST/C/deadlock.jpg
+/mnt/backup/GST/C/rwlocks1.jpg
+/mnt/backup/GST/C/simplelock.jpg
+/mnt/backup/GST/JAVA/readblock.jpg
+/mnt/backup/GST/JAVA/writeblock.jpg
   :
 ```
 
@@ -63,13 +75,13 @@ and edit for your Azure system environment.
 ### Example1
 Parallelism is Single.(Default)
 ```
-  $ perl ./azure-storage.pl < list.txt
+  $ ./azure-storage.pl < list.txt
 ```
 
 ### Example2
 Parallelism is 10.
 ```
-  $ perl ./azure-storage.pl -p 10 < list.txt
+  $ ./azure-storage.pl -p 10 < list.txt
 ```
 
 ## Writing to DB
@@ -95,6 +107,6 @@ Example(Default on Ubuntu)
 At first, you need to get incoming api webhook uri, and set it to your environment value SLACK_API
 ```
   $ export SLACK_API=https://hooks.slack.com/services/T1DF00000/B2DP00000/y7kqe88JsXrOwP0000000000
-  $ perl ./azure_storage --slack channelname -p 5
+  $ ./azure_storage --slack channelname -p 5
 ```
 
