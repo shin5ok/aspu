@@ -1,7 +1,8 @@
+use strict;
+use warnings;
 package Storage;
 use Class::Accessor::Lite ( rw => [qw( account container saskey )] );
 use JSON;
-use Data::Dumper;
 
 sub new {
   my ($class, $params) = @_;
