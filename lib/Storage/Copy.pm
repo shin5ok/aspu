@@ -1,6 +1,6 @@
-package Storage::Copy 0.01;
 use strict;
 use warnings;
+package Storage::Copy 0.01;
 use Data::Dumper;
 use Class::Accessor::Lite ( rw => [qw( path md5 )] );
 use Storage::Select;

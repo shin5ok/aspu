@@ -1,3 +1,5 @@
+use strict;
+use warnings;
 package Storage::Select 0.01;
 use File::Basename;
 use JSON;
