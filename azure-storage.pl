@@ -15,15 +15,16 @@ opts my $parallel => { isa => 'Int', default => 1 },
      my $debug    => { isa => 'Bool' };
 
 my $pf = Parallel::ForkManager->new( $parallel );
-my $mongodb = Storage::DB->new;
 
 chdir "/";
+
+my $mongodb = Storage::DB->new;
 
 _PF_:
 while (my $data = <STDIN>) {
   $pf->start and next _PF_;
   my ($path, $md5) = $data =~ /^(\S+)\s+(\S*)/;
-  # valus of md5 would not be used
+  # For now, values of md5 would not be used
   my $obj = Storage::Copy->new( $path, $md5 );
   if (my $storage_obj = $obj->copy) {
     $mongodb->upsert(
