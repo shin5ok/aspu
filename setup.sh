@@ -1,9 +1,10 @@
 #!/bin/bash
 
-if ! which pip > /dev/null;
+if ! which pip > /dev/null || ! which blobxfer > /dev/null;
 then
   echo "You must install pip, and run as below,"
   echo "$ sudo pip install blobxfer -y"
+  exit 1
 fi
 
 echo -n "It might take for a while"
