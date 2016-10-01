@@ -6,6 +6,18 @@
 ```
   $ sudo pip install blobxfer -y
 ```
+If you got errors that not found pip, try below as,
+###### Ubuntu  
+```
+  $ sudo apt-cache update
+  $ sudo apt-get install python-pip
+```
+###### CentOS 6 or later  
+```
+  $ sudo yum groupinstall "Development Tools"
+  $ sudo yum install python-pip
+```
+
 
 If you want to use mongodb on local  
 ###### Ubuntu  

@@ -18,7 +18,7 @@ sudo true
 
 PERL_MONGODB_WITH_SSL=1
 export PERL_MONGODB_WITH_SSL
-curl -L http://cpanmin.us/ | sudo perl - LWP::UserAgent LWP::Protocol::https MongoDB Parallel::ForkManager Class::Accessor::Lite JSON YAML opts
+curl -L http://cpanmin.us/ | sudo perl - Sys::Syslog Fatal LWP::UserAgent LWP::Protocol::https MongoDB Parallel::ForkManager Class::Accessor::Lite JSON YAML opts
 
 echo
 echo
