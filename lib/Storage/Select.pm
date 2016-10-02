@@ -23,7 +23,6 @@ package Storage::Select 0.01 {
       }
     }
     $storage_name //= $dispatch_config->[0]->{storage};
-warn Dumper $config;
     return Storage->new( $config->{storage}->{$storage_name} );
   }
 
