@@ -1,0 +1,21 @@
+---
+storage:
+  storage1:
+    account: shkawan1
+    container: foo
+    saskey: sv=2015-04-05&ss=bfqt&srt=sco&sp=rwl&st=2016-10-01T15%3A39%3A00Z&se=2016-10-02T15%3A39%3A00Z&sig=mpO%2FYYmP9Rm0FWctkV9KwI5rSTaaKHeq0AAwPlWIMpo%3D
+  storage2:
+    account: shkawan2
+    container: bar
+    saskey: sv=2015-04-05&ss=bfqt&srt=sco&sp=rwl&st=2016-10-01T15%3A39%3A00Z&se=2016-10-02T15%3A39%3A00Z&sig=1YMII7ERdpMPsHhPtspGexZMyV3DZS%2BgzwPJ9aEhMBg%3D
+
+copy_module: dispatch_by_filename
+copy_module_params:
+  dispatch_by_filename:
+    - name: "a-p"
+      pattern: ^[a-p]
+      storage: storage1
+    - name: "q-z0-9"
+      pattern: ^[q-z0-9]
+      storage: storage2
+

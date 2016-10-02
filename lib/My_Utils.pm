@@ -12,6 +12,7 @@ package My_Utils 0.01 {
 
   # URL of slack api for incoming webhook
   our $SLACK_API = $ENV{MY_SLACK_API};
+  our $debug     = exists $ENV{DEBUG} ? $ENV{DEBUG} : undef;
   
   my $lwp;
   sub post_to_myslack {
@@ -34,10 +35,14 @@ package My_Utils 0.01 {
 
   sub logging {
     my $caller = caller;
+    my $log = shift;
     openlog $caller, q{pid,delay}, q{local1};
     setlogsock q{unix};
-    syslog q{info}, shift // q{};
+    syslog q{info}, $log // q{};
     closelog;
+    if ($debug) {
+      print {*STDERR} $log, "\n";
+    }
   }
 
 }
