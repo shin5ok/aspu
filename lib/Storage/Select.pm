@@ -23,7 +23,7 @@ sub get {
     }
   }
   $storage_name //= $dispatch_config->[0]->{storage};
-  return Storage->new( $dispatch_config->{$storage_name} );
+  return Storage->new( $config->{storage}->{$storage_name} );
 }
 
 
