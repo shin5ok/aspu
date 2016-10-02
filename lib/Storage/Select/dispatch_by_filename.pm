@@ -1,9 +1,11 @@
 use strict;
 use warnings;
-package Storage::dispatch_by_filename 0.01 {
+package Storage::Select::dispatch_by_filename 0.01 {
   use File::Basename;
   use JSON;
   use Data::Dumper;
+  use Storage::Select;
+  use base qw(Storage::Select);
 
   sub get {
     my ($self, $name) = @_;
