@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Storage::Copy 0.01;
 use Data::Dumper;
-use Class::Accessor::Lite ( rw => [qw( path md5 )], ro => [qw( config )] );
+use Class::Accessor::Lite ( rw => [qw( path md5 config )] );
 require Storage::Config;
 use My_Utils qw(logging);
 
