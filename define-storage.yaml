@@ -1,9 +1,0 @@
----
-storage1:
-  account: storage2101
-  container: bar
-  saskey: sv=2015-04-05&ss=bfqt&srt=sco&sp=rwdlacup&se=2016-09-24T21:25:49Z&st=2016-09-18T13:25:49Z&spr=https&sig=%2FEplVhxcJXfN8dShNLYFLGs0dnpIJlSvUxOkA%2F1KQz8%3D
-storage2:
-  account: storage9391
-  container: foo
-  saskey: sv=2015-04-05&ss=bfqt&srt=sco&sp=rwdlacup&se=2016-09-24T21:27:49Z&st=2016-09-18T13:27:49Z&spr=https&sig=B6U1JIjNvCeJWQrSJ2HvTNZyKwZP4wW7Aw12WkIDz7w%3D

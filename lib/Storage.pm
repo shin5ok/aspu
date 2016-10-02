@@ -6,7 +6,6 @@ use JSON;
 
 sub new {
   my ($class, $params) = @_;
-  warn Dumper $params;
   bless $params, $class;
 }
 
