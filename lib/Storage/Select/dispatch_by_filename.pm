@@ -1,17 +1,13 @@
 use strict;
 use warnings;
-package Storage::Select 0.01 {
+package Storage::dispatch_by_filename 0.01 {
   use File::Basename;
   use JSON;
   use Data::Dumper;
-  require Storage;
-  require Storage::Config;
-
-  my $config = Storage::Config->get;
-  my $dispatch;
 
   sub get {
-    my ($name) = @_;
+    my ($self, $name) = @_;
+    my $config = $self->{config};
     my $basename = basename $name;
     my $dispatch_config = $config->{copy_module_params}->{dispatch_by_filename};
     my $storage_name;
