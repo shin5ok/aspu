@@ -1,9 +1,21 @@
 ---
-storage1:
-  account: storage2101
-  container: bar
-  saskey: sv=2015-04-05&ss=bfqt&srt=sco&sp=rwdlacup&se=2016-09-24T21:25:49Z&st=2016-09-18T13:25:49Z&spr=https&sig=%2FEplVhxcJXfN8dShNLYFLGs0dnpIJlSvUxOkA%2F1KQz8%3D
-storage2:
-  account: storage9391
-  container: foo
-  saskey: sv=2015-04-05&ss=bfqt&srt=sco&sp=rwdlacup&se=2016-09-24T21:27:49Z&st=2016-09-18T13:27:49Z&spr=https&sig=B6U1JIjNvCeJWQrSJ2HvTNZyKwZP4wW7Aw12WkIDz7w%3D
+storage:
+  - storage1:
+    account: storage2101
+    container: bar
+    saskey: sv=2015-04-05&ss=bfqt&srt=sco&sp=rwdlacup&se=2016-09-24T21:25:49Z&st=2016-09-18T13:25:49Z&spr=https&sig=%2FEplVhxcJXfN8dShNLYFLGs0dnpIJlSvUxOkA%2F1KQz8%3D
+  - storage2:
+    account: storage9391
+    container: foo
+    saskey: sv=2015-04-05&ss=bfqt&srt=sco&sp=rwdlacup&se=2016-09-24T21:27:49Z&st=2016-09-18T13:27:49Z&spr=https&sig=B6U1JIjNvCeJWQrSJ2HvTNZyKwZP4wW7Aw12WkIDz7w%3D
+
+copy_module: dispatch_by_filename
+copy_module_params:
+  dispatch_by_filename:
+    - name: "a-p"
+      pattern: ^[a-p]
+      storage: storage1
+    - name: "q-z0-9"
+      pattern: ^[q-z0-9]
+      storage: storage2
+
