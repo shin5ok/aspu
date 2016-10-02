@@ -53,9 +53,8 @@ If you want to use mongodb on local
 
 
 ## Configure
-### dispatch.json
-
-### define-storage.yaml
+### $HOME/config.yaml
+Edit your config.yaml placed your home directory
 
 ## Usage
 
