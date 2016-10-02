@@ -10,10 +10,10 @@ package Storage::Config 0.01 {
 
   our $config_yaml = qq{$config_path/config.yaml};
 
-  my $dispatch_params //= YAML::LoadFile( $config_yaml );
+  my $config_params //= YAML::LoadFile( $config_yaml );
 
-  sub config {
-    
+  sub get {
+    return $config_params;
   }
 
 }
