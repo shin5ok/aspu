@@ -96,7 +96,7 @@ Parallelism is 10.
 ```
 
 ## Writing to DB
-### MongoDB(or You can use DocumentDB with MongoDB compatible as well)
+### MongoDB(or You can use Azure DocumentDB with MongoDB compatible feature)
 Default
 ```
   $ mongo azure_storage
