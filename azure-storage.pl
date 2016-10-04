@@ -10,6 +10,8 @@ require Storage::Copy;
 require Storage::DB;
 use My_Utils qw(logging post_to_myslack singlelock);
 
+our $VERSION = q(0.01);
+
 logging sprintf "%s %s", $0, (join " ", @ARGV);
 
 opts my $parallel => { isa => 'Int', default => 1 },
