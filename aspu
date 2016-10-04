@@ -33,6 +33,8 @@ while (my $data = <STDIN>) {
   $master = 0;
   # For now, values of md5 would not be used
   my ($path, $md5) = $data =~ /^(\S+)\s+(\S*)/;
+  defined $path or next _PF_;
+
   my $obj = ASPU::Copy->new( $path, $md5 );
   if (my $storage_obj = $obj->copy) {
     $mongodb->upsert(
