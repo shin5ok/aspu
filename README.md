@@ -1,4 +1,4 @@
-# Azure Storage parallel uploader
+# Azure Storage Uploader(ASU)
 
 ## Get Started
 ### Install
@@ -31,7 +31,7 @@ If you want to use mongodb on local
   $ sudo yum install mongodb-server mongodb -y
 ```
 
-#### 2. Get source from GitHub
+#### 2. Get sources from GitHub
 ```
   $ git clone https://bitbucket.org/shkawan/storage-sync.git
 ```
@@ -47,7 +47,7 @@ If you want to use mongodb on local
 
 #### 4. Test
 ```
-  $ perl -c ./azure-storage-uploader.pl
+  $ perl -c ./aspu.pl
 ```
   If you got a message "Syntax OK", everything would be working !
 
@@ -90,13 +90,13 @@ and edit for your Azure system environment.
 ### Example1
 Parallelism is Single.(Default)
 ```
-  $ ./azure-storage-uploader.pl < list.txt
+  $ ./aspu.pl < list.txt
 ```
 
 ### Example2
 Parallelism is 10.
 ```
-  $ ./azure-storage-uploader.pl -p 10 < list.txt
+  $ ./aspu.pl -p 10 < list.txt
 ```
 
 ## Writing to DB
@@ -122,10 +122,10 @@ Example(Default on Ubuntu)
 At first, you need to get incoming api webhook uri, and set it to your environment value MY_SLACK_API
 ```
   $ export MY_SLACK_API=https://hooks.slack.com/services/T1DF00000/B2DP00000/y7kqe88JsXrOwP0000000000
-  $ ./azure_storage --slack channelname -p 5
+  $ ./aspu.pl --slack channelname -p 5
 ```
 
 ### to mail
 ```
-  $ ./azure_storage --mail foo@uname.link -p 5
+  $ ./aspu.pl --mail foo@uname.link -p 5
 ```
