@@ -1,10 +1,10 @@
 use strict;
 use warnings;
-package ASU::Select::roundrobin 0.01 {
+package ASPU::Select::roundrobin 0.01 {
   use Data::Dumper;
   use File::Basename;
-  use ASU::Select;
-  use base qw(ASU::Select);
+  use ASPU::Select;
+  use base qw(ASPU::Select);
 
   my $counter = sprintf "/var/tmp/.%s.count", basename __FILE__;
   my $storages_ref;
@@ -17,7 +17,7 @@ package ASU::Select::roundrobin 0.01 {
 
     my $index = _get_index( @$storages_ref + 0 );
 
-    return ASU->new( $config->{storage}->{$storages_ref->[$index]} );
+    return ASPU->new( $config->{storage}->{$storages_ref->[$index]} );
   }
 
   sub _get_index {

@@ -1,12 +1,12 @@
 use strict;
 use warnings;
-package ASU::Select 0.01 {
+package ASPU::Select 0.01 {
   use Carp;
-  require ASU;
+  require ASPU;
 
   sub new {
     my $obj = bless {}, shift;
-    $obj->{config} = ASU::Config->get;
+    $obj->{config} = ASPU::Config->get;
     return $obj;
   }
 

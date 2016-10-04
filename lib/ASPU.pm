@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-package Storage;
+package ASPU;
 use Class::Accessor::Lite ( rw => [qw( account container saskey )] );
 use JSON;
 
