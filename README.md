@@ -56,6 +56,10 @@ If you want to use mongodb on local
 ### $HOME/config.yaml
 Edit your config.yaml placed your home directory
 
+1. Set your storage accounts
+2. Select a logic to select storage  
+  For now, it can support dispatch_by_filename and roundrobin
+
 ## Usage
 
 ## Pre requirement
