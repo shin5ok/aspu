@@ -66,7 +66,7 @@ package My_Utils 0.01 {
     if ($mode) {
       logging "Try locking with $path";
       if (! mkdir $path) {
-        croak "Locking Error";
+        croak "Locking Error $path";
       }
     } else {
       logging "remove lock dir $path";
