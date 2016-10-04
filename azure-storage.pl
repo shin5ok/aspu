@@ -15,7 +15,8 @@ our $VERSION = q(0.01);
 logging sprintf "%s %s", $0, (join " ", @ARGV);
 
 opts my $parallel => { isa => 'Int', default => 1 },
-     my $slack    => { isa => 'Str', },
+     my $slack    => { isa => 'Bool' },
+     my $mail     => { isa => 'Bool' },
      my $debug    => { isa => 'Bool' };
 
 my $pf = Parallel::ForkManager->new( $parallel );
@@ -43,9 +44,8 @@ while (my $data = <STDIN>) {
       },
     );
   } else {
-    if ($slack) {
-      post_to_myslack($slack, "fail: $path");
-    }
+     post_to_myslack($slack, "fail: $path") if $slack;
+     sendmail($path)                        if $mail;
   }
   $pf->finish;
 }
