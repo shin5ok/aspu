@@ -6,8 +6,8 @@ use opts;
 use File::Basename;
 use Parallel::ForkManager;
 use lib qq($FindBin::Bin/./lib);
-require Storage::Copy;
-require Storage::DB;
+require ASPU::Copy;
+require ASPU::DB;
 use My_Utils qw( logging post_to_myslack singlelock sendmail );
 
 our $VERSION = q(0.01);
@@ -25,7 +25,7 @@ chdir "/";
 
 singlelock(1);
 
-my $mongodb = Storage::DB->new;
+my $mongodb = ASPU::DB->new;
 my $master  = 1;
 _PF_:
 while (my $data = <STDIN>) {
@@ -33,7 +33,7 @@ while (my $data = <STDIN>) {
   $master = 0;
   # For now, values of md5 would not be used
   my ($path, $md5) = $data =~ /^(\S+)\s+(\S*)/;
-  my $obj = Storage::Copy->new( $path, $md5 );
+  my $obj = ASPU::Copy->new( $path, $md5 );
   if (my $storage_obj = $obj->copy) {
     $mongodb->upsert(
       "path",

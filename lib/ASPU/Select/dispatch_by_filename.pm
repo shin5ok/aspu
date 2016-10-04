@@ -1,11 +1,11 @@
 use strict;
 use warnings;
-package Storage::Select::dispatch_by_filename 0.01 {
+package ASPU::Select::dispatch_by_filename 0.01 {
   use File::Basename;
   use JSON;
   use Data::Dumper;
-  use Storage::Select;
-  use base qw(Storage::Select);
+  use ASPU::Select;
+  use base qw(ASPU::Select);
 
   sub get {
     my ($self, $name) = @_;
@@ -21,7 +21,7 @@ package Storage::Select::dispatch_by_filename 0.01 {
       }
     }
     $storage_name //= $dispatch_config->[0]->{storage};
-    return Storage->new( $config->{storage}->{$storage_name} );
+    return ASPU->new( $config->{storage}->{$storage_name} );
   }
 
 }

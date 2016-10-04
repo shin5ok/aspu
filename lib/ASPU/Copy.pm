@@ -1,10 +1,10 @@
 use strict;
 use warnings;
-package Storage::Copy 0.01;
+package ASPU::Copy 0.01;
 use Data::Dumper;
 use Class::Accessor::Lite ( rw => [qw( path md5 config )] );
 use My_Utils qw(logging);
-require Storage::Config;
+require ASPU::Config;
 
 our $command_format = qq{blobxfer %s %s %s --upload --computeblockmd5 --saskey '%s' --strip-components=0};
 
@@ -13,13 +13,13 @@ sub new {
   my $obj = bless {}, $class;
   $obj->path( $path );
   $obj->md5( $md5 );
-  $obj->config( Storage::Config->get );
+  $obj->config( ASPU::Config->get );
   return $obj;
 }
 
 sub copy {
   my ($self) = @_;
-  my $storage_module = qq{Storage::Select::} . $self->config->{copy_module};
+  my $storage_module = qq{ASPU::Select::} . $self->config->{copy_module};
   eval qq{use $storage_module};
   my $storage_obj = $storage_module->new->get( $self->{path} ); 
   my $command = sprintf $command_format, 

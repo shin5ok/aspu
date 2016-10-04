@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-package Storage::Config 0.01 {
+package ASPU::Config 0.01 {
   use YAML;
 
   my $config_path = exists $ENV{AZURE_STORAGE_SELECT_CONFIG_PATH}

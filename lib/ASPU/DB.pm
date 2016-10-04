@@ -1,11 +1,11 @@
 use strict;
 use warnings;
 
-package Storage::DB 0.01;
+package ASPU::DB 0.01;
 use MongoDB;
-use Storage::Config;
+use ASPU::Config;
 
-my $config = Storage::Config->get;
+my $config = ASPU::Config->get;
 
 my $hostname; 
 my $port    ;
