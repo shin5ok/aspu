@@ -1,4 +1,4 @@
-# Azure Storage Parallel Uploader(ASPU)
+# Azure Storage Parallel Uploader (ASPU)
 
 ## Get Started
 ### Install
@@ -47,7 +47,7 @@ If you want to use mongodb on local
 
 #### 4. Test
 ```
-  $ perl -c ./aspu.pl
+  $ perl -c ./aspu
 ```
   If you got a message "Syntax OK", everything would be working !
 
@@ -94,13 +94,13 @@ and edit for your Azure system environment.
 ### Example1
 Parallelism is Single.(Default)
 ```
-  $ ./aspu.pl < list.txt
+  $ ./aspu < list.txt
 ```
 
 ### Example2
 Parallelism is 10.
 ```
-  $ ./aspu.pl -p 10 < list.txt
+  $ ./aspu -p 10 < list.txt
 ```
 
 ## Writing to DB
@@ -126,10 +126,10 @@ Example(Default on Ubuntu)
 At first, you need to get incoming api webhook uri, and set it to your environment value MY_SLACK_API
 ```
   $ export MY_SLACK_API=https://hooks.slack.com/services/T1DF00000/B2DP00000/y7kqe88JsXrOwP0000000000
-  $ ./aspu.pl --slack channelname -p 5
+  $ ./aspu --slack channelname -p 5
 ```
 
 ### to mail
 ```
-  $ ./aspu.pl --mail foo@uname.link -p 5
+  $ ./aspu --mail foo@uname.link -p 5
 ```
