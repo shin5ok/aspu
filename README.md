@@ -119,8 +119,14 @@ Example(Default on Ubuntu)
   $ tail -f /var/log/syslog
 ```
 ### to Slack
-At first, you need to get incoming api webhook uri, and set it to your environment value SLACK_API
+At first, you need to get incoming api webhook uri, and set it to your environment value MY_SLACK_API
 ```
-  $ export SLACK_API=https://hooks.slack.com/services/T1DF00000/B2DP00000/y7kqe88JsXrOwP0000000000
+  $ export MY_SLACK_API=https://hooks.slack.com/services/T1DF00000/B2DP00000/y7kqe88JsXrOwP0000000000
   $ ./azure_storage --slack channelname -p 5
+```
+
+### to mail
+At first, you need to set mail_to config in config.yaml
+```
+  $ ./azure_storage --mail -p 5
 ```
