@@ -7,8 +7,9 @@ package My_Utils 0.01 {
   use LWP::UserAgent;
   use JSON;
   use Exporter q(import);
+  use Carp;
 
-  our @EXPORT_OK = qw( post_to_myslack logging );
+  our @EXPORT_OK = qw( post_to_myslack logging singlelock );
 
   # URL of slack api for incoming webhook
   our $SLACK_API = $ENV{MY_SLACK_API};
@@ -42,6 +43,23 @@ package My_Utils 0.01 {
     closelog;
     if ($debug) {
       print {*STDERR} $log, "\n";
+    }
+  }
+
+  sub singlelock {
+    my @callers = caller();
+    my $path = sprintf "/var/tmp/.%s.lock", basename $callers[1];
+    my $mode = shift;
+
+    my $v;
+    if ($mode) {
+      logging "Try locking with $path";
+      if (! mkdir $path) {
+        croak "Locking Error";
+      }
+    } else {
+      logging "remove lock dir $path";
+      rmdir $path;
     }
   }
 

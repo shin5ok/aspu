@@ -8,7 +8,9 @@ use Parallel::ForkManager;
 use lib qq($FindBin::Bin/./lib);
 require Storage::Copy;
 require Storage::DB;
-use My_Utils qw(logging post_to_myslack);
+use My_Utils qw(logging post_to_myslack singlelock);
+
+logging sprintf "%s %s", $0, (join " ", @ARGV);
 
 opts my $parallel => { isa => 'Int', default => 1 },
      my $slack    => { isa => 'Str', },
@@ -17,6 +19,8 @@ opts my $parallel => { isa => 'Int', default => 1 },
 my $pf = Parallel::ForkManager->new( $parallel );
 
 chdir "/";
+
+singlelock(1);
 
 my $mongodb = Storage::DB->new;
 
@@ -46,3 +50,6 @@ while (my $data = <STDIN>) {
 
 $pf->wait_all_children;
 
+END {
+  singlelock(0);
+};
