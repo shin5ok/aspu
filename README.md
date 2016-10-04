@@ -1,4 +1,4 @@
-# Azure Storage Uploader(ASU)
+# Azure Storage Parallel Uploader(ASPU)
 
 ## Get Started
 ### Install
