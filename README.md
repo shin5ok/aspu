@@ -33,14 +33,14 @@ If you want to use mongodb on local
 
 #### 2. Get sources from GitHub
 ```
-  $ git clone https://bitbucket.org/shkawan/storage-sync.git
+  $ git clone https://bitbucket.org/shkawan/aspu.git
 ```
 
 #### 3. Setup  
   You need a superuser power. 
   You might be asked sudo password.
 ```
-  $ cd storage-sync/
+  $ cd aspu/
   $ sh ./setup.sh
 ```
   If you got some messages, you should follow them.  
@@ -85,7 +85,7 @@ To run the script,
 You have to set environment value AZURE_STORAGE_SELECT_CONFIG_PATH that is used to config path.
 if not, config path is your HOME directory.
 ```
-  $ export AZURE_STORAGE_SELECT_CONFIG_PATH=$HOME/storage-sync
+  $ export AZURE_STORAGE_SELECT_CONFIG_PATH=$HOME/aspu
 ```
 For simply start, 
 You can copy dispatch.json and define-storage.yaml to $HOME or AZURE_STORAGE_SELECT_CONFIG_PATH,
