@@ -10,7 +10,7 @@ require ASPU::Copy;
 require ASPU::DB;
 use My_Utils qw( logging post_to_myslack singlelock sendmail );
 
-our $VERSION = q(0.01);
+our $VERSION = q(0.02);
 
 logging sprintf "%s %s", $0, (join " ", @ARGV);
 
