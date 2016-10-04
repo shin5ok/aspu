@@ -4,6 +4,8 @@ use warnings;
 package Storage::DB 0.01;
 use MongoDB;
 
+# todo:
+# move these params to config.yaml
 our $hostname = 'localhost';
 our $port     = 27017;
 our $db_name  = 'azure_storage';
