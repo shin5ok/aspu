@@ -6,7 +6,7 @@ use Class::Accessor::Lite ( rw => [qw( path md5 config )] );
 use My_Utils qw(logging);
 require Storage::Config;
 
-our $command_format = qq{blobxfer %s %s %s --upload --computeblockmd5 --saskey '%s'};
+our $command_format = qq{blobxfer %s %s %s --upload --computeblockmd5 --saskey '%s' --strip-components=0};
 
 sub new {
   my ($class, $path, $md5) = @_;

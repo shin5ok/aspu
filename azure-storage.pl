@@ -26,12 +26,13 @@ chdir "/";
 singlelock(1);
 
 my $mongodb = Storage::DB->new;
-
+my $master  = 1;
 _PF_:
 while (my $data = <STDIN>) {
   $pf->start and next _PF_;
-  my ($path, $md5) = $data =~ /^(\S+)\s+(\S*)/;
+  $master = 0;
   # For now, values of md5 would not be used
+  my ($path, $md5) = $data =~ /^(\S+)\s+(\S*)/;
   my $obj = Storage::Copy->new( $path, $md5 );
   if (my $storage_obj = $obj->copy) {
     $mongodb->upsert(
@@ -54,5 +55,5 @@ while (my $data = <STDIN>) {
 $pf->wait_all_children;
 
 END {
-  singlelock(0);
+  singlelock(0) if $master;
 };
