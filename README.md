@@ -47,7 +47,7 @@ If you want to use mongodb on local
 
 #### 4. Test
 ```
-  $ perl -c ./azure-storage.pl
+  $ perl -c ./azure-storage-uploader.pl
 ```
   If you got a message "Syntax OK", everything would be working !
 
@@ -90,13 +90,13 @@ and edit for your Azure system environment.
 ### Example1
 Parallelism is Single.(Default)
 ```
-  $ ./azure-storage.pl < list.txt
+  $ ./azure-storage-uploader.pl < list.txt
 ```
 
 ### Example2
 Parallelism is 10.
 ```
-  $ ./azure-storage.pl -p 10 < list.txt
+  $ ./azure-storage-uploader.pl -p 10 < list.txt
 ```
 
 ## Writing to DB
