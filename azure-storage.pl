@@ -8,14 +8,14 @@ use Parallel::ForkManager;
 use lib qq($FindBin::Bin/./lib);
 require Storage::Copy;
 require Storage::DB;
-use My_Utils qw(logging post_to_myslack singlelock);
+use My_Utils qw( logging post_to_myslack singlelock sendmail );
 
 our $VERSION = q(0.01);
 
 logging sprintf "%s %s", $0, (join " ", @ARGV);
 
 opts my $parallel => { isa => 'Int', default => 1 },
-     my $slack    => { isa => 'Bool' },
+     my $slack    => { isa => 'Str'  },
      my $mail     => { isa => 'Bool' },
      my $debug    => { isa => 'Bool' };
 
@@ -44,8 +44,9 @@ while (my $data = <STDIN>) {
       },
     );
   } else {
-     post_to_myslack($slack, "fail: $path") if $slack;
-     sendmail($path)                        if $mail;
+     my $message = "fail: $path";
+     post_to_myslack($slack, $message) if $slack;
+     sendmail($message)                if $mail;
   }
   $pf->finish;
 }
