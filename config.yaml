@@ -21,3 +21,10 @@ copy_module_params:
       pattern: ^[q-z0-9]
       storage: storage2
 
+mongodb:
+# hostname: localhost
+# port    : 
+# user    : 
+# password: 
+  dbname  : azure
+  collname: storage

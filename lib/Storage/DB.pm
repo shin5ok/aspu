@@ -3,15 +3,25 @@ use warnings;
 
 package Storage::DB 0.01;
 use MongoDB;
+use Storage::Config;
 
-# todo:
-# move these params to config.yaml
-our $hostname = 'localhost';
-our $port     = 27017;
-our $db_name  = 'azure_storage';
-our $collname = 'store';
-our $username = $ENV{MONGODB_USER};
-our $password = $ENV{MONGODB_PASSWORD};
+my $config = Storage::Config->get;
+
+my $hostname; 
+my $port    ;
+my $db_name ;
+my $collname;
+my $username;
+my $password;
+{
+  no strict 'refs';
+  $hostname = $config->{mongodb}->{hostname} // q{localhost};
+  $port     = $config->{mongodb}->{port}     // 27017;
+  $db_name  = $config->{mongodb}->{dbname};
+  $collname = $config->{mongodb}->{collname};
+  $username = $config->{mongodb}->{user};
+  $password = $config->{mongodb}->{password};
+}
 
 sub new {
   my ($class, $params) = @_;
