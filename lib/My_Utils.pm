@@ -8,12 +8,15 @@ package My_Utils 0.01 {
   use JSON;
   use Exporter q(import);
   use Carp;
+  require Storage::Config;
 
   our @EXPORT_OK = qw( post_to_myslack logging singlelock );
 
   # URL of slack api for incoming webhook
   our $SLACK_API = $ENV{MY_SLACK_API};
   our $debug     = exists $ENV{DEBUG} ? $ENV{DEBUG} : undef;
+
+  my $config = Storage::Config->get;
   
   my $lwp;
   sub post_to_myslack {
@@ -35,15 +38,26 @@ package My_Utils 0.01 {
   }
 
   sub logging {
-    my $caller = caller;
+    my @callers = caller;
     my $log = shift;
-    openlog $caller, q{pid,delay}, q{local1};
+    openlog $callers[1], q{pid,delay}, q{local1};
     setlogsock q{unix};
     syslog q{info}, $log // q{};
     closelog;
     if ($debug) {
       print {*STDERR} $log, "\n";
     }
+  }
+
+  sub sendmail {
+    my @callers = caller;
+    my $log = shift;
+    open my $p, "| /usr/sbin/sendmail -t";
+    print {$p} "To: $config->{mail_to}\n";
+    print {$p} "Subject: ALERT: $callers[1]\n";
+    print {$p} "\n";
+    print {$p} $log;
+    close $p;
   }
 
   sub singlelock {
