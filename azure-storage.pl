@@ -42,7 +42,7 @@ while (my $data = <STDIN>) {
         container => $storage_obj->container,
         filename  => basename $path,
       },
-    );
+    ) or logging "DB store fail: $path";
   } else {
      my $message = "fail: $path";
      post_to_myslack($slack, $message) if $slack;
