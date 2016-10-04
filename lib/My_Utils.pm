@@ -10,7 +10,7 @@ package My_Utils 0.01 {
   use Carp;
   require Storage::Config;
 
-  our @EXPORT_OK = qw( post_to_myslack logging singlelock );
+  our @EXPORT_OK = qw( post_to_myslack logging singlelock sendmail );
 
   # URL of slack api for incoming webhook
   our $SLACK_API = $ENV{MY_SLACK_API};
