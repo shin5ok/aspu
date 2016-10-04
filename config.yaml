@@ -9,7 +9,8 @@ storage:
     container: bar
     saskey: ?sv=2015-04-05&ss=bfqt&srt=sco&sp=rwl&st=2016-10-04T00%3A15%3A00Z&se=2016-10-05T00%3A15%3A00Z&sig=VcryzfUJ23lGmY6%2Bdha3jMxkINy%2FlGsbWiV1jfHU2AI%3D
 
-# You can select logics to select storage dispatch_by_filename, roundrobin
+# select logics to select storage dispatch_by_filename, roundrobin
+# roundrobin maybe the fastest
 copy_module: roundrobin
 copy_module_params:
   dispatch_by_filename:
