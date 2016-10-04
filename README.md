@@ -126,7 +126,6 @@ At first, you need to get incoming api webhook uri, and set it to your environme
 ```
 
 ### to mail
-At first, you need to set mail_to config in config.yaml
 ```
-  $ ./azure_storage --mail -p 5
+  $ ./azure_storage --mail foo@uname.link -p 5
 ```

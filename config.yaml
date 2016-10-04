@@ -21,4 +21,3 @@ copy_module_params:
       pattern: ^[q-z0-9]
       storage: storage2
 
-mail_to: kawano@uname.link
