@@ -8,7 +8,6 @@ package My_Utils 0.01 {
   use JSON;
   use Exporter q(import);
   use Carp;
-  require Storage::Config;
 
   our @EXPORT_OK = qw( post_to_myslack logging singlelock sendmail );
 
@@ -16,8 +15,6 @@ package My_Utils 0.01 {
   our $SLACK_API = $ENV{MY_SLACK_API};
   our $debug     = exists $ENV{DEBUG} ? $ENV{DEBUG} : undef;
 
-  my $config = Storage::Config->get;
-  
   my $lwp;
   sub post_to_myslack {
     my ($channel, $text) = @_;
@@ -51,9 +48,9 @@ package My_Utils 0.01 {
 
   sub sendmail {
     my @callers = caller;
-    my $log = shift;
+    my ($to, $log) = @_;
     open my $p, "| /usr/sbin/sendmail -t";
-    print {$p} "To: $config->{mail_to}\n";
+    print {$p} "To: $to\n";
     print {$p} "Subject: ALERT: $callers[1]\n";
     print {$p} "\n";
     print {$p} $log;
