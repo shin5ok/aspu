@@ -118,7 +118,7 @@ You can use Azure DocumentDB with MongoDB compatible instead of original MongoDB
 ## Logging and Notification
 ### Syslog
 Facility is local0, Level is info
-Example(Default on Ubuntu)
+##### Example(Default on Ubuntu)
 ```
   $ tail -f /var/log/syslog
 ```
