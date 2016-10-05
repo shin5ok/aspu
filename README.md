@@ -60,7 +60,7 @@ Edit your config.yaml placed your home directory
 ```
 
 Minimum config:  
-1. Set your storage accounts
+1. Set your storage accounts  
 2. Select a logic to select storage  
   For now, it can support logics dispatch_by_filename and roundrobin
 
