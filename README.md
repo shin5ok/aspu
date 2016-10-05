@@ -49,7 +49,7 @@ If you want to use mongodb on local
 ```
   $ perl -c ./aspu
 ```
-  If you got a message "Syntax OK", everything would be working !
+  You saw a message "Syntax OK", everything would be working !
 
 
 ## Configure
