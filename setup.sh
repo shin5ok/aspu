@@ -22,7 +22,7 @@ curl -L http://cpanmin.us/ | sudo perl - Sys::Syslog Fatal LWP::UserAgent LWP::P
 
 echo
 echo
-if perl -c ./azure-storage.pl > /dev/null 2>&1;
+if perl -c ./aspu > /dev/null 2>&1;
 then
   echo "Setup has been completed"
 else
