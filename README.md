@@ -12,7 +12,7 @@ If you got errors that not found pip, try below as,
   $ sudo apt-cache update
   $ sudo apt-get install python-pip
 ```
-###### CentOS 6 or later  
+###### CentOS 7 or later  
 ```
   $ sudo yum groupinstall "Development Tools"
   $ sudo yum install python-pip
