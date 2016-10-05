@@ -6,7 +6,7 @@
 ```
   $ sudo pip install blobxfer -y
 ```
-If you got errors that not found pip, try below as,
+If you got errors that did not find pip, try below as,
 ###### Ubuntu  
 ```
   $ sudo apt-cache update
@@ -25,7 +25,7 @@ If you want to use mongodb on local
   $ sudo apt-cache update
   $ sudo apt-get install mongodb-server mongodb -y
 ```
-###### CentOS 6 or later  
+###### CentOS 7 or later  
 ```
   $ sudo yum install epel-release -y
   $ sudo yum install mongodb-server mongodb -y
