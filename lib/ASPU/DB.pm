@@ -53,7 +53,15 @@ sub new {
 sub upsert {
   my ($self, $key, $data) = @_;
   return if not $self->{mongodb};
-  $self->{mongodb}->update({ $key => $data->{$key} }, { '$set' => $data }, { upsert => 1, multiple => 0, });
+  local $@;
+  my $r;
+  eval {
+    $r = $self->{mongodb}->update({ $key => $data->{$key} }, { '$set' => $data }, { upsert => 1, multiple => 0, });
+  };
+  if ($@) {
+    warn $@, "\n";
+  }
+  return $r;
 }
 
 1;
