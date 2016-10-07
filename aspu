@@ -27,13 +27,20 @@ singlelock(1);
 
 my $mongodb = ASPU::DB->new;
 my $master  = 1;
+my %tried;
 _PF_:
 while (my $data = <STDIN>) {
-  $pf->start and next _PF_;
-  $master = 0;
-
   my ($path) = $data =~ /^(.+)/;
   defined $path or next _PF_;
+
+  if (exists $tried{$path}) {
+    next _PF_;
+  } else {
+    $tried{$path} = 1;
+  }
+
+  $pf->start and next _PF_;
+  $master = 0;
 
   my $obj = ASPU::Copy->new( $path );
   if (my $storage_obj = $obj->copy) {
