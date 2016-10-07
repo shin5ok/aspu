@@ -6,7 +6,7 @@ use Class::Accessor::Lite ( rw => [qw( path md5 config )] );
 use My_Utils qw(logging);
 require ASPU::Config;
 
-our $command_format = qq{blobxfer %s %s %s --upload --computeblockmd5 --saskey '%s' --strip-components=0};
+our $command_format = qq{blobxfer %s %s %s --upload --saskey '%s' --strip-components=0};
 
 sub new {
   my ($class, $path, $md5) = @_;
