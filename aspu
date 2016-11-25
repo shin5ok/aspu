@@ -17,6 +17,7 @@ logging sprintf "%s %s", $0, (join " ", @ARGV);
 opts my $parallel => { isa => 'Int', default => 1 },
      my $slack    => { isa => 'Str'  },
      my $mail     => { isa => 'Str'  },
+     my $db       => { isa => 'Bool'  },
      my $debug    => { isa => 'Bool' };
 
 my $pf = Parallel::ForkManager->new( $parallel );
@@ -44,6 +45,7 @@ while (my $data = <STDIN>) {
 
   my $obj = ASPU::Copy->new( $path );
   if (my $storage_obj = $obj->copy) {
+    $db or next _PF_;
     $mongodb->upsert(
       "path",
       +{
