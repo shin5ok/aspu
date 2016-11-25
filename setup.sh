@@ -3,7 +3,7 @@
 if ! ( which pip > /dev/null && which blobxfer > /dev/null );
 then
   echo "You must install pip, and run as below,"
-  echo "$ sudo pip install blobxfer -y"
+  echo "$ sudo pip install blobxfer"
   exit 1
 fi
 
