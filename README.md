@@ -103,12 +103,6 @@ Parallelism is 10.
   $ ./aspu -p 10 < list.txt
 ```
 
-### Example3
-Parallelism is 10 and store results to MongoDB is running on localhost.
-```
-  $ ./aspu -p 10 --db < list.txt
-```
-
 ## Writing to DB
 ### MongoDB(or You can use Azure DocumentDB with MongoDB compatible feature)
 Default

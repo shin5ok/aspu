@@ -4,12 +4,12 @@ storage:
     name: storage1
     account: shkawan1
     container: foo
-    saskey: ?sv=2015-04-05&ss=bfqt&srt=sco&sp=rwl&st=2016-10-04T00%3A15%3A00Z&se=2016-10-05T00%3A15%3A00Z&sig=mA6Mw5ppmmp69YFOnxcT%2FbxYYn68w6cNA%2B0UdJCgXvw%3D
+    saskey: #################################################
   storage2:
     name: storage2
     account: shkawan2
     container: bar
-    saskey: ?sv=2015-04-05&ss=bfqt&srt=sco&sp=rwl&st=2016-10-04T00%3A15%3A00Z&se=2016-10-05T00%3A15%3A00Z&sig=VcryzfUJ23lGmY6%2Bdha3jMxkINy%2FlGsbWiV1jfHU2AI%3D
+    saskey: #################################################
 
 # select logics to select storage dispatch_by_filename, roundrobin
 # roundrobin maybe the fastest
