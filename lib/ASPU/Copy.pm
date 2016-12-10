@@ -17,8 +17,8 @@ sub new {
   return $obj;
 }
 
-sub copy {
-  my ($self) = @_;
+sub operate {
+  my ($self, $mode_string) = @_;
   my $storage_module = qq{ASPU::Select::} . $self->config->{copy_module};
   eval qq{use $storage_module};
   my $storage_obj = $storage_module->new->get( $self->{path} ); 
@@ -30,19 +30,19 @@ sub copy {
                    "--saskey",
                    $storage_obj->saskey,
                    "--strip-components=0",
-                   "--upload",
                   );
+  push @commands, $mode_string;
 
   my $r;
   {
-    close STDERR;
-    close STDOUT;
-    close STDIN;
+    # close STDERR;
+    # close STDOUT;
+    # close STDIN;
     $r = system @commands;
   }
 
   my $command = join " ", @commands;
-  print $command,"\n";
+  # print $command,"\n";
 
   if ($r == 0) {
     _logging( "ok: $command" );
@@ -51,6 +51,16 @@ sub copy {
     _logging( "NG: $command" );
     return undef;
   }
+}
+
+sub copy {
+  my ($self) = @_;
+  $self->operate("--upload");
+}
+
+sub delete {
+  my ($self) = @_;
+  $self->operate("--delete");
 }
 
 sub _logging {
