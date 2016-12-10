@@ -31,7 +31,7 @@ my %tried;
 binmode STDIN, ":utf8";
 _PF_:
 while (my $data = <STDIN>) {
-  my ($path) = $data =~ /^(.+)/;
+  my ($mode, $path) = $data =~ /^(\S+)\s+(.+)/;
   defined $path or next _PF_;
 
   if (exists $tried{$path}) {
@@ -44,17 +44,7 @@ while (my $data = <STDIN>) {
   $master = 0;
 
   my $obj = ASPU::Copy->new( $path );
-  if (my $storage_obj = $obj->copy) {
-    # $mongodb->upsert(
-    #   "path",
-    #   +{
-    #     path      => $path,
-    #     storage   => $storage_obj->account,
-    #     container => $storage_obj->container,
-    #     filename  => basename $path,
-    #   },
-    # ) or logging "DB store fail: $path";
-  } else {
+  if (! (my $storage_obj = $obj->$mode)) {
      my $message = "fail: $path";
      post_to_myslack($slack, $message) if $slack;
      sendmail($mail,$message)          if $mail;

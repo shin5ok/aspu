@@ -39,12 +39,15 @@ sub operate {
 
   my $r;
   {
-    local *STDERR;
-    local *STDOUT;
+    open SAVEERR, ">&", STDERR;
+    open SAVEOUT, ">&", STDOUT;
     open STDERR, ">", "/dev/null";
     open STDOUT, ">", "/dev/null";
     $r = system @commands;
+    open STDERR, ">&", SAVEERR;
+    open STDOUT, ">&", SAVEOUT;
   }
+  print "ok ($$)\n";
 
   my $command = join " ", @commands;
   if ($r == 0) {
@@ -58,7 +61,6 @@ sub operate {
 
 sub copy {
   my ($self) = @_;
-  warn $self->{path};
   my $storage_obj = $self->operate("--upload");
   $self->db->upsert(
     "path",
