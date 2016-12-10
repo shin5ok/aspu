@@ -22,10 +22,7 @@ sub new {
 }
 
 sub operate {
-  my ($self, $mode_string) = @_;
-  my $storage_module = qq{ASPU::Select::} . $self->config->{copy_module};
-  eval qq{use $storage_module};
-  my $storage_obj = $storage_module->new->get( $self->{path} ); 
+  my ($self, $mode_string, $storage_obj) = @_;
   my @commands = (
                    "blobxfer",
                    $storage_obj->account,
@@ -47,7 +44,7 @@ sub operate {
     open STDERR, ">&", SAVEERR;
     open STDOUT, ">&", SAVEOUT;
   }
-  print "ok ($$)\n";
+  # print "ok ($$)\n";
 
   my $command = join " ", @commands;
   if ($r == 0) {
@@ -61,7 +58,10 @@ sub operate {
 
 sub copy {
   my ($self) = @_;
-  my $storage_obj = $self->operate("--upload");
+  my $storage_module = qq{ASPU::Select::} . $self->config->{copy_module};
+  eval qq{use $storage_module};
+  my $storage_obj = $storage_module->new->get( $self->{path} );
+  $self->operate("--upload", $storage_obj);
   $self->db->upsert(
     "path",
     +{
@@ -75,7 +75,9 @@ sub copy {
 
 sub delete {
   my ($self) = @_;
-  $self->operate("--delete");
+  my $db = $self->db->find_one( +{ path => $self->{path} });
+  my $storage_obj = ASPU::Select->get( $db->{storage} );
+  $self->operate("--delete", $storage_obj);
   $self->db->delete_many( +{ path => $self->{path} });
 }
 
@@ -84,4 +86,3 @@ sub _logging {
 }
 
 1;
-

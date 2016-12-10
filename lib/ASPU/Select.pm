@@ -11,7 +11,11 @@ package ASPU::Select 0.01 {
   }
 
   sub get {
-    croak;
+    my ($self, $storage_name) = @_;
+    # return ASPU->new( $config->{storage}->{$storage_name} );
+    ASPU->new(
+      $self->{config}->{storage}->{$storage_name}
+    );
   }
 
 }
