@@ -66,12 +66,12 @@ sub copy {
   $self->db->upsert(
     "path",
     +{
-      storage   => $storage_obj->{name},
-      deleted   => 0,
       path      => $self->{path},
+      storage   => $storage_obj->{name},
       filename  => (basename $self->{path}),
       account   => $storage_obj->account,
       container => $storage_obj->container,
+      deleted   => 0,
     },
   );
 }
@@ -86,7 +86,12 @@ sub delete {
   $self->db->upsert(
     "path",
     +{
-      deleted => 1,
+      path      => $self->{path},
+      storage   => $storage_obj->{name},
+      filename  => (basename $self->{path}),
+      account   => $storage_obj->account,
+      container => $storage_obj->container,
+      deleted   => 1,
     },
   );
 }
