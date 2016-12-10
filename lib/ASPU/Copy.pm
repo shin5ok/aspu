@@ -35,9 +35,8 @@ sub operate {
 
   my $r;
   {
-    # close STDERR;
-    # close STDOUT;
-    # close STDIN;
+    open STDERR, ">", "/dev/null";
+    open STDOUT, ">", "/dev/null";
     $r = system @commands;
   }
 
