@@ -2,9 +2,10 @@ use strict;
 use warnings;
 package ASPU::Copy 0.01;
 use Data::Dumper;
-use Class::Accessor::Lite ( rw => [qw( path md5 config )] );
+use Class::Accessor::Lite ( rw => [qw( path md5 config db )] );
 use My_Utils qw(logging);
 require ASPU::Config;
+require ASPU::DB;
 
 our $command_format = qq{blobxfer %s %s %s --upload --saskey '%s' --strip-components=0};
 
@@ -14,6 +15,7 @@ sub new {
   $obj->path( $path );
   $obj->md5( $md5 );
   $obj->config( ASPU::Config->get );
+  $obj->db( ASPU::DB->new );
   return $obj;
 }
 
@@ -41,8 +43,6 @@ sub operate {
   }
 
   my $command = join " ", @commands;
-  # print $command,"\n";
-
   if ($r == 0) {
     _logging( "ok: $command" );
     return $storage_obj;
