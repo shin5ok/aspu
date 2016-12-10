@@ -54,7 +54,7 @@ sub operate {
 
 sub copy {
   my ($self) = @_;
-  $self->operate("--upload");
+  my $storage_obj = $self->operate("--upload");
   $self->db->upsert(
     "path",
     +{
@@ -69,15 +69,7 @@ sub copy {
 sub delete {
   my ($self) = @_;
   $self->operate("--delete");
-  $self->db->upsert(
-    "path",
-    +{
-      path      => $self->{path},
-      storage   => $storage_obj->account,
-      container => $storage_obj->container,
-      filename  => basename $self->{path},
-    },
-  );
+  $self->db->delete_many( +{ path => $self->{path} });
 }
 
 sub _logging {
