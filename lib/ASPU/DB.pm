@@ -53,6 +53,7 @@ sub new {
 sub upsert {
   my ($self, $key, $data) = @_;
   return if not $self->{mongodb};
+  use Data::Dumper; warn Dumper $data;
   local $@;
   my $r;
   eval {

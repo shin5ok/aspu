@@ -7,6 +7,7 @@ use Class::Accessor::Lite ( rw => [qw( path md5 config db )] );
 use My_Utils qw(logging);
 use utf8;
 require ASPU::Config;
+require ASPU::Select;
 require ASPU::DB;
 
 our $command_format = qq{blobxfer %s %s %s --upload --saskey '%s' --strip-components=0};
@@ -65,20 +66,29 @@ sub copy {
   $self->db->upsert(
     "path",
     +{
+      storage   => $storage_obj->{name},
+      deleted   => 0,
       path      => $self->{path},
-      storage   => $storage_obj->account,
+      filename  => (basename $self->{path}),
+      account   => $storage_obj->account,
       container => $storage_obj->container,
-      filename  => basename $self->{path},
     },
   );
 }
 
 sub delete {
   my ($self) = @_;
-  my $db = $self->db->find_one( +{ path => $self->{path} });
-  my $storage_obj = ASPU::Select->get( $db->{storage} );
+  my $db = $self->db->{mongodb}->find_one( +{ path => $self->{path} });
+  my $storage_obj = ASPU::Select->new->get( $db->{storage} );
+  $storage_obj or return;
+
   $self->operate("--delete", $storage_obj);
-  $self->db->delete_many( +{ path => $self->{path} });
+  $self->db->upsert(
+    "path",
+    +{
+      deleted => 1,
+    },
+  );
 }
 
 sub _logging {
