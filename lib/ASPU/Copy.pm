@@ -2,8 +2,10 @@ use strict;
 use warnings;
 package ASPU::Copy 0.01;
 use Data::Dumper;
+use File::Basename;
 use Class::Accessor::Lite ( rw => [qw( path md5 config db )] );
 use My_Utils qw(logging);
+use utf8;
 require ASPU::Config;
 require ASPU::DB;
 
@@ -37,6 +39,8 @@ sub operate {
 
   my $r;
   {
+    local *STDERR;
+    local *STDOUT;
     open STDERR, ">", "/dev/null";
     open STDOUT, ">", "/dev/null";
     $r = system @commands;
@@ -54,6 +58,7 @@ sub operate {
 
 sub copy {
   my ($self) = @_;
+  warn $self->{path};
   my $storage_obj = $self->operate("--upload");
   $self->db->upsert(
     "path",

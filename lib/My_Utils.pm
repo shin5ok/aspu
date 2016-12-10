@@ -6,6 +6,7 @@ package My_Utils 0.01 {
   use File::Basename;
   use LWP::UserAgent;
   use JSON;
+  use Encode qw( decode encode );
   use Exporter q(import);
   use Carp;
 
@@ -37,6 +38,7 @@ package My_Utils 0.01 {
   sub logging {
     my @callers = caller;
     my $log = shift;
+    $log = encode 'UTF-8', $log;
     openlog $callers[1], q{pid,delay}, q{local1};
     setlogsock q{unix};
     syslog q{info}, $log // q{};
