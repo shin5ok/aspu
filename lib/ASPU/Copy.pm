@@ -22,12 +22,27 @@ sub copy {
   my $storage_module = qq{ASPU::Select::} . $self->config->{copy_module};
   eval qq{use $storage_module};
   my $storage_obj = $storage_module->new->get( $self->{path} ); 
-  my $command = sprintf $command_format, 
-                        $storage_obj->account,
-                        $storage_obj->container,
-                        $self->{path},
-                        $storage_obj->saskey;
-  my $r = system $command . " > /dev/null";
+  my @commands = (
+                   "blobxfer",
+                   $storage_obj->account,
+                   $storage_obj->container,
+                   $self->{path},
+                   "--saskey",
+                   $storage_obj->saskey,
+                   "--strip-components=0",
+                   "--upload",
+                  );
+
+  my $r;
+  {
+    close STDERR;
+    close STDOUT;
+    close STDIN;
+    $r = system @commands;
+  }
+
+  my $command = join " ", @commands;
+  print $command,"\n";
 
   if ($r == 0) {
     _logging( "ok: $command" );
