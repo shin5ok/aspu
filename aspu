@@ -16,7 +16,7 @@ logging sprintf "%s %s", $0, (join " ", @ARGV);
 
 opts my $parallel => { isa => 'Int', default => 1 },
      my $slack    => { isa => 'Str'  },
-     my $mail     => { isa => 'Str'  },
+     my $mail    => { isa => 'Str'  },
      my $debug    => { isa => 'Bool' };
 
 my $pf = Parallel::ForkManager->new( $parallel );
@@ -44,15 +44,15 @@ while (my $data = <STDIN>) {
 
   my $obj = ASPU::Copy->new( $path );
   if (my $storage_obj = $obj->copy) {
-    $mongodb->upsert(
-      "path",
-      +{
-        path      => $path,
-        storage   => $storage_obj->account,
-        container => $storage_obj->container,
-        filename  => basename $path,
-      },
-    ) or logging "DB store fail: $path";
+    # $mongodb->upsert(
+    #   "path",
+    #   +{
+    #     path      => $path,
+    #     storage   => $storage_obj->account,
+    #     container => $storage_obj->container,
+    #     filename  => basename $path,
+    #   },
+    # ) or logging "DB store fail: $path";
   } else {
      my $message = "fail: $path";
      post_to_myslack($slack, $message) if $slack;
