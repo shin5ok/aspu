@@ -67,6 +67,7 @@ sub copy {
     my $storage_module = qq{ASPU::Select::} . $self->config->{copy_module};
     eval qq{use $storage_module};
     $storage_obj = $storage_module->new->get( $self->{path} );
+    _logging(sprintf "assign Atorage %s to %s/%s", $self->{path}, $storage_obj->account, $storage_obj->container);
   }
   $self->operate("--upload", $storage_obj);
   $self->db->upsert(
