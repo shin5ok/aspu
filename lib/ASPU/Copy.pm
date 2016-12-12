@@ -59,9 +59,15 @@ sub operate {
 
 sub copy {
   my ($self) = @_;
-  my $storage_module = qq{ASPU::Select::} . $self->config->{copy_module};
-  eval qq{use $storage_module};
-  my $storage_obj = $storage_module->new->get( $self->{path} );
+  my $db = $self->db->{mongodb}->find_one( +{ path => $self->{path} });
+  my $storage_obj;
+  if (exists $db->{storage}) {
+    $storage_obj = ASPU::Select->new->get( $db->{storage} );
+  } else {
+    my $storage_module = qq{ASPU::Select::} . $self->config->{copy_module};
+    eval qq{use $storage_module};
+    $storage_obj = $storage_module->new->get( $self->{path} );
+  }
   $self->operate("--upload", $storage_obj);
   $self->db->upsert(
     "path",
