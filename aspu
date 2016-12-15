@@ -29,6 +29,14 @@ my $mongodb = ASPU::DB->new;
 my $master  = 1;
 my %tried;
 binmode STDIN, ":utf8";
+
+local $SIG{INT} = sub {
+  singlelock(0) if $master;
+  warn "receiving signal INT...", "\n";
+  sleep 1;
+  exit 255;
+};
+
 _PF_:
 while (my $data = <STDIN>) {
   my ($mode, $path) = $data =~ /^(\S+)\s+(.+)/;
