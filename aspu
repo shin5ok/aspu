@@ -33,8 +33,7 @@ binmode STDIN, ":utf8";
 local $SIG{INT} = sub {
   singlelock(0) if $master;
   warn "receiving signal INT...", "\n";
-  sleep 1;
-  exit 255;
+  exit;
 };
 
 _PF_:

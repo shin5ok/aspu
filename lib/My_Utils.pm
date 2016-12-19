@@ -15,6 +15,7 @@ package My_Utils 0.01 {
   # URL of slack api for incoming webhook
   our $SLACK_API = $ENV{MY_SLACK_API};
   our $debug     = exists $ENV{DEBUG} ? $ENV{DEBUG} : undef;
+  our $locked;
 
   my $lwp;
   sub post_to_myslack {
@@ -69,10 +70,14 @@ package My_Utils 0.01 {
       logging "Try locking with $path";
       if (! mkdir $path) {
         croak "Locking Error $path";
+      } else {
+        $My_Utils::locked = 1;
       }
     } else {
-      logging "remove lock dir $path";
-      rmdir $path;
+      if ($My_Utils::locked) {
+        logging "remove lock dir $path";
+        rmdir $path;
+      }
     }
   }
 

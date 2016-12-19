@@ -1,9 +1,18 @@
 #!/bin/bash
 
+if ! ( which gcc > /dev/null && which make > /dev/null );
+then
+  echo "You need to install 'Developer Tools'"
+  echo "If you are on RedHat/CentOS, you should type as below,"
+  echo "\$ export LANG=C"
+  echo "\$ sudo yum groupinstall 'Developer Tools'"
+  exit 1
+fi
+
 if ! ( which pip > /dev/null && which blobxfer > /dev/null );
 then
-  echo "You must install pip, and run as below,"
-  echo "$ sudo pip install blobxfer"
+  echo "You need to install pip, and run as below,"
+  echo "\$ sudo pip install blobxfer"
   exit 1
 fi
 
