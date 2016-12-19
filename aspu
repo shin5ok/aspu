@@ -50,9 +50,10 @@ while (my $data = <STDIN>) {
   $pf->start and next _PF_;
   $master = 0;
 
-  my $obj = ASPU::Copy->new( $path );
-  if (! (my $storage_obj = $obj->$mode)) {
+  my $storage_obj = ASPU::Copy->new( $path )->$mode;
+  if (! $storage_obj) {
      my $message = "fail: $path";
+     logging( $message );
      post_to_myslack($slack, $message) if $slack;
      sendmail($mail,$message)          if $mail;
   }
@@ -64,4 +65,3 @@ $pf->wait_all_children;
 END {
   singlelock(0) if $master;
 };
-

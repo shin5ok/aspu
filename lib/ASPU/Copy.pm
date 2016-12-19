@@ -49,10 +49,10 @@ sub operate {
 
   my $command = join " ", @commands;
   if ($r == 0) {
-    _logging( "ok: $command" );
+    logging( "ok: $command" );
     return $storage_obj;
   } else {
-    _logging( "NG: $command" );
+    logging( "NG: $command" );
     return undef;
   }
 }
@@ -69,7 +69,9 @@ sub copy {
     $storage_obj = $storage_module->new->get( $self->{path} );
     _logging(sprintf "assign Atorage %s to %s/%s", $self->{path}, $storage_obj->account, $storage_obj->container);
   }
-  $self->operate("--upload", $storage_obj);
+  if (! $self->operate("--upload", $storage_obj)) {
+    return undef;
+  }
   $self->db->upsert(
     "path",
     +{
@@ -89,7 +91,9 @@ sub delete {
   my $storage_obj = ASPU::Select->new->get( $db->{storage} );
   $storage_obj or return;
 
-  $self->operate("--delete", $storage_obj);
+  if (! $self->operate("--delete", $storage_obj)) {
+    return undef;
+  }
   $self->db->upsert(
     "path",
     +{
@@ -101,10 +105,6 @@ sub delete {
       deleted   => 1,
     },
   );
-}
-
-sub _logging {
-  goto \&logging;
 }
 
 1;
