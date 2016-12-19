@@ -22,6 +22,8 @@ do
   sudo yum install $package -y
 done
 sudo pip install blobxfer
+sudo /sbin/chkconfig mongod on
+sudo /sbin/service mongod start
 
 PERL_MONGODB_WITH_SSL=1
 export PERL_MONGODB_WITH_SSL
