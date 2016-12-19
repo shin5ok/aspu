@@ -1,18 +1,8 @@
 #!/bin/bash
 
-if ! ( which gcc > /dev/null && which make > /dev/null );
+if ! test -e /etc/redhat-release;
 then
-  echo "You need to install 'Developer Tools'"
-  echo "If you are on RedHat/CentOS, you should type as below,"
-  echo "\$ export LANG=C"
-  echo "\$ sudo yum groupinstall 'Developer Tools'"
-  exit 1
-fi
-
-if ! ( which pip > /dev/null && which blobxfer > /dev/null );
-then
-  echo "You need to install pip, and run as below,"
-  echo "\$ sudo pip install blobxfer"
+  echo "It seems not CentOS / RedHat OS"
   exit 1
 fi
 
@@ -24,6 +14,14 @@ do
 done
 echo
 sudo true
+
+LANG=C sudo sh -c "yum groupinstall 'Development Tools' -y"
+PACKAGES="epel-release python-pip python-devel openssl-devel perl-devel mongodb mongodb-server"
+for package in $PACKAGES
+do
+  sudo yum install $package -y
+done
+sudo pip install blobxfer
 
 PERL_MONGODB_WITH_SSL=1
 export PERL_MONGODB_WITH_SSL
